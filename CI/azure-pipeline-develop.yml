@@ -1,0 +1,12 @@
+name: 'Develop'
+pr:
+  autoCancel: true
+  branches:
+    include:
+    - master
+    - outsystems
+
+stages:
+- template: 'templates/tests-stage.yml'
+  parameters:
+    platforms: ['ios', 'js'] # Platforms to test for, it can be 'all' to test all

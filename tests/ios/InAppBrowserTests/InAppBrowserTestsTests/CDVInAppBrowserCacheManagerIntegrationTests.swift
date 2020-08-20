@@ -8,7 +8,7 @@ class CDVInAppBrowserCacheManagerIntegrationTests: XCTestCase {
     private var target: BrowserCacheManager?
     private var store: WKWebsiteDataStore?
     
-    override func setUpWithError() throws {
+    override func setUp() {
         let store = WKWebsiteDataStore.default()
         target = BrowserCacheManager(dataStore: store)
         self.store = store

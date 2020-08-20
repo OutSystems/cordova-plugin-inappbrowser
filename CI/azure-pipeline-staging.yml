@@ -1,0 +1,12 @@
+# Squeleton of a could be a staging pipeline, stages need to be checked for the needs
+
+name: 'Staging'
+trigger:
+  - master
+  - outsystems
+
+stages:
+  - template: 'templates/tests-stage.yml'
+    parameters:
+      platforms: ['all'] # Platforms to test for, it can be 'all' to test all ('ios', 'js', 'android')
+  - template: 'templates/deploy-test-env-stage.yml' # Deployment Job to deploy code for UI Testing

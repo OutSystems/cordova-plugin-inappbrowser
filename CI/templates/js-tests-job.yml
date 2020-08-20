@@ -1,0 +1,18 @@
+# For now just a simple squeleton needs proper setting for js build and tests tasks
+
+parameters:
+- name: workingDirectory
+  type: string
+  default: ''
+
+jobs:
+  - job: jsTest
+    displayName: 'JS Tests'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: 'npm-steps.yml'
+      parameters:
+        workingDirectory: ${{ parameters.workingDirectory }}
+    - script: 'echo successful tests' # Mocked response
+      workingDirectory: ${{ parameters.workingDirectory }}

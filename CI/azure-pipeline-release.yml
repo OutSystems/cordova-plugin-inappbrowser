@@ -1,0 +1,22 @@
+# Squeleton of a could be a staging pipeline, stages need to be checked for the needs
+# When a tag is set in the outsystems branch, a release pipeline will start that will:
+# - run unit tests
+# - deploy to test env and start UI Tests
+# - deploy to outsystems release env
+
+# Known problems UItests is a different pipeline.
+
+name: 'Release'
+trigger:
+  tags:
+    include:
+    - '*'
+
+stages:
+  - template: 'templates/tests-stage.yml'
+    parameters:
+      platforms: ['all'] # Platforms to test for, it can be 'all' to test all ('ios', 'js', 'android')
+  - template: 'templates/deploy-test-env-stage.yml' # Deployment Job to deploy code for UI Testing
+    parameters:
+      shouldRunTests: true # Run the UI Tests immediately after deployment
+      release: ['github', 'outsystems'] # Platforms to release for, it can be empty if there should be no release

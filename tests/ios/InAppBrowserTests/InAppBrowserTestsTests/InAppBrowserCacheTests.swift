@@ -6,7 +6,7 @@ class InAppBrowserCacheTests: XCTestCase {
     private var target: SafariBrowserPlugin?
     private var manager: StubCacheManager?
     
-    override func setUpWithError() throws {
+    override func setUp() {
         let manager = StubCacheManager()
         target = SafariBrowserPlugin(cacheManager: manager)
         self.manager = manager

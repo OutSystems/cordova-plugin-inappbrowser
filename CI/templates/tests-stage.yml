@@ -1,0 +1,19 @@
+parameters:
+ platforms: []
+
+stages:
+- stage: Testing
+  jobs:
+  - ${{ if or(containsValue(parameters.platforms, 'all'), containsValue(parameters.platforms, 'ios')) }}:
+    - template: 'ios-tests-job.yml'
+      parameters:
+        scheme: 'InAppBrowserTests'
+        workingDirectory: 'tests/ios'
+  - ${{ if or(containsValue(parameters.platforms, 'all'), containsValue(parameters.platforms, 'android')) }}:
+    - template: 'android-tests-job.yml'
+      parameters:
+        workingDirectory: 'tests'
+  - ${{ if or(containsValue(parameters.platforms, 'all'), containsValue(parameters.platforms, 'js')) }}:
+    - template: 'js-tests-job.yml'
+      parameters:
+        workingDirectory: 'tests'
